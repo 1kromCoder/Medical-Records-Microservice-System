@@ -7,12 +7,16 @@ import {
   Param,
   Patch,
   Post,
+  UseGuards,
 } from '@nestjs/common';
 import { DoctorService } from './doctor.service';
 import { CreateDoctorDto } from './dto/create-doctor.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { UpdateDoctorDto } from './dto/update.dto';
 import { lastValueFrom } from 'rxjs';
+import { Roles } from 'src/common/decorators/roles.decorator';
+import { JwtAuthGuard } from 'src/common/guards/jwt-auth.guard';
+import { RolesGuard } from 'src/common/guards/roles.guard';
 
 @ApiTags('Doctor')
 @Controller('doctors')
