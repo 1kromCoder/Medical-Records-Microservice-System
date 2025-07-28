@@ -11,6 +11,15 @@ async function bootstrap() {
   const config = new DocumentBuilder()
     .setTitle('Medical Records Microservice System API')
     .setVersion('1.0')
+    .addBearerAuth(
+      {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+        description: 'Enter JWT token',
+      },
+      'access-token',
+    )
     .build();
 
   const doc = SwaggerModule.createDocument(app, config);

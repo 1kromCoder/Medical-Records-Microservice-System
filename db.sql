@@ -40,3 +40,21 @@ CREATE TABLE "note" (
   "visitId" INTEGER NOT NULL,
   CONSTRAINT "fk_visit" FOREIGN KEY ("visitId") REFERENCES "visit"("id") ON DELETE CASCADE
 );
+
+CREATE TYPE "user_role_enum" AS ENUM ('ADMIN', 'DOCTOR');
+
+CREATE TABLE "user" (
+  "id" SERIAL PRIMARY KEY,
+  "name" VARCHAR(255) NOT NULL,
+  "email" VARCHAR(255) UNIQUE NOT NULL,
+  "password" VARCHAR(255) NOT NULL,
+  "role" "user_role_enum",
+  "doctorId" INTEGER,
+  "createdAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  "updatedAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO "user" ("name", "email", "password", "role")
+VALUES ('Ikromxon', 'ikrom@example.com', 'hashedpassword', 'ADMIN');
+
+

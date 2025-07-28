@@ -9,8 +9,11 @@ async function bootstrap() {
     {
       transport: Transport.GRPC,
       options: {
-        package: 'doctor',
-        protoPath: join(process.cwd(), 'proto/doctor.proto'),
+        package: ['doctor', 'user'],
+        protoPath: [
+          join(process.cwd(), 'proto/doctor.proto'),
+          join(process.cwd(), 'proto/user.proto'),
+        ],
         url: 'localhost:3001',
       },
     },

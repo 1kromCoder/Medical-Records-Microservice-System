@@ -7,7 +7,6 @@ import {
 
 export class CreatePatientTable implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
-    // 1. Create `patient` table
     await queryRunner.createTable(
       new Table({
         name: 'patient',
@@ -38,7 +37,6 @@ export class CreatePatientTable implements MigrationInterface {
       }),
     );
 
-    // 2. Add foreign key to doctor table
     await queryRunner.createForeignKey(
       'patient',
       new TableForeignKey({
@@ -51,7 +49,6 @@ export class CreatePatientTable implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    // 1. Jadvalni olishga harakat qilamiz
     const table = await queryRunner.getTable('patient');
 
     if (table) {
@@ -62,7 +59,6 @@ export class CreatePatientTable implements MigrationInterface {
         await queryRunner.dropForeignKey('patient', foreignKey);
       }
 
-      // 2. Jadvalni o‘chiramiz
       await queryRunner.dropTable('patient');
     }
   }

@@ -7,7 +7,6 @@ import {
 
 export class CreateVisitTable1711234567899 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
-    // 1. visit jadvalini yaratish
     await queryRunner.createTable(
       new Table({
         name: 'visit',
@@ -32,7 +31,6 @@ export class CreateVisitTable1711234567899 implements MigrationInterface {
       true,
     );
 
-    // 2. Foreign Key qo‘shish (visit -> patient)
     await queryRunner.createForeignKey(
       'visit',
       new TableForeignKey({
@@ -45,7 +43,6 @@ export class CreateVisitTable1711234567899 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    // Jadval mavjudligini tekshiramiz
     const table = await queryRunner.getTable('visit');
     if (table) {
       const foreignKey = table.foreignKeys.find((fk) =>

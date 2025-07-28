@@ -1,4 +1,11 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { User } from 'src/user/user.entity';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToMany,
+  OneToOne,
+} from 'typeorm';
 
 @Entity({ name: 'doctor' })
 export class Doctor {
@@ -10,4 +17,7 @@ export class Doctor {
 
   @Column({ unique: true })
   email: string;
+
+  @OneToOne(() => User, (user) => user.doctor, { onDelete: 'CASCADE' })
+  user: User;
 }

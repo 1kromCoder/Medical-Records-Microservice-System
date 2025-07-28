@@ -5,6 +5,8 @@ import { DoctorModule } from './doctor/doctor.module';
 import { PatientModule } from './patient/patient.module';
 import { VisitModule } from './visit/visit.module';
 import { NoteModule } from './note/note.module';
+import { UserModule } from './user/user.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -49,7 +51,18 @@ import { NoteModule } from './note/note.module';
           url: 'localhost:3003',
         },
       },
+      {
+        name: 'USER',
+        transport: Transport.GRPC,
+        options: {
+          package: 'user',
+          protoPath: join(__dirname, '../proto/user.proto'),
+          url: 'localhost:3001',
+        },
+      },
     ]),
+    UserModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],
