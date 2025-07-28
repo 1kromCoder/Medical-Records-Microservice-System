@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package note;
+
+import "google/protobuf/empty.proto";
+
+service NoteService {
+  rpc CreateNote (CreateNoteRequest) returns (Note);
+  rpc FindAllNotes(google.protobuf.Empty) returns (NoteList);
+  rpc FindOneNote(FindOneNoteRequest) returns (Note);
+  rpc UpdateNote(UpdateNoteRequest) returns (Note);
+  rpc DeleteNote(DeleteNoteRequest) returns (Note);
+}
+
+message CreateNoteRequest {
+  string text = 1;
+  int32 visitId = 2;
+}
+
+message UpdateNoteRequest {
+  int32 id = 1;
+  string text = 2;
+  int32 visitId = 3;
+}
+
+message FindOneNoteRequest {
+  int32 id = 1;
+}
+
+
+message DeleteNoteRequest {
+  int32 id = 1;
+}
+
+message Note {
+  int32 id = 1;
+  string text = 2;
+  string createdAt = 3;
+  int32 visitId = 4;
+}
+
+message NoteList {
+  repeated Note items = 1;
+}

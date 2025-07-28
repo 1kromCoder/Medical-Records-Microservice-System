@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package note;
+
+service NoteService {
+  rpc CreateNote(CreateNoteDto) returns (Note);
+  rpc FindAllNotes(Empty) returns (NoteList);
+  rpc FindOneNote (NoteIdRequest) returns (Note);
+  rpc UpdateNote (UpdateNoteDto) returns (Note);
+  rpc DeleteNote (NoteIdRequest) returns (Note);
+}
+
+message CreateNoteDto {
+  string text = 1;
+  int32 visitId = 2;
+}
+
+message UpdateNoteDto {
+  int32 id = 1;
+  string text = 2;
+  int32 visitId = 3;
+}
+
+message NoteIdRequest {
+  int32 id = 1;
+}
+
+message Note {
+  int32 id = 1;
+  string text = 2;
+  string createdAt = 3;
+  int32 visitId = 4;
+}
+
+message NoteList {
+  repeated Note items = 1;
+}
+
+message Empty {}

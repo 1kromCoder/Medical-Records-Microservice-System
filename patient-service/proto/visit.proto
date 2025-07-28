@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+package visit;
+
+service VisitService {
+  rpc CreateVisit(CreateVisitDto) returns (Visit);
+  rpc FindAllVisits(Empty) returns (VisitList);
+  rpc FindOneVisit(IdRequest) returns (Visit);
+  rpc UpdateVisit(UpdateVisitDto) returns (Visit);
+  rpc DeleteVisit(IdRequest) returns (Visit);
+}
+
+message UpdateVisitDto {
+  int32 id = 1;
+  string visitDate = 2;
+  int32 patientId = 3;
+}
+
+
+message IdRequest {
+  int32 id = 1;
+}
+
+
+
+message CreateVisitDto {
+  string visitDate = 1;
+  int32 patientId = 2;
+}
+
+message Patient {
+  int32 id = 1;
+  string name = 2;
+  string dob = 3;
+  int32 doctorId = 4;
+}
+
+message Visit {
+  int32 id = 1;
+  string visitDate = 2;
+  int32 patientId = 3;
+  Patient patient = 4; 
+}
+
+message VisitList {
+  repeated Visit items = 1;
+}
+
+message Empty {}

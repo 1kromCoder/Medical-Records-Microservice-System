@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package patient;
+
+import "google/protobuf/empty.proto";
+
+message UpdatePatientRequest {
+  int32 id = 1;
+  string name = 2;
+  string dob = 3;
+  int32 doctorId = 4;
+}
+
+message PatientIdRequest {
+  int32 id = 1;
+}
+
+service PatientService {
+  rpc CreatePatient(CreatePatientDto) returns (Patient);
+  rpc FindAllPatients(Empty) returns (PatientList);
+  rpc FindOnePatient(PatientIdRequest) returns (Patient);
+  rpc UpdatePatient(UpdatePatientRequest) returns (Patient);
+  rpc DeletePatient(PatientIdRequest) returns (Patient);
+}
+
+message CreatePatientDto {
+  string name = 1;
+  string dob = 2;    
+  int32 doctorId = 3;
+}
+
+message Patient {
+  int32 id = 1;
+  string name = 2;
+  string dob = 3;
+  int32 doctorId = 4;
+}
+
+message PatientList {
+  repeated Patient items = 1;
+}
+
+message Empty {}

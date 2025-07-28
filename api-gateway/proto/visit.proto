@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package visit;
+
+import "google/protobuf/empty.proto";
+
+service VisitService {
+  rpc CreateVisit(CreateVisitDto) returns (Visit);
+  rpc FindAllVisits(Empty) returns (VisitList);
+  rpc FindOneVisit(IdRequest) returns (Visit);
+  rpc UpdateVisit(UpdateVisitRequest) returns (Visit);
+  rpc DeleteVisit(IdRequest) returns (Visit);
+}
+
+message IdRequest {
+  int32 id = 1;
+}
+
+message UpdateVisitRequest {
+  int32 id = 1;
+  string visitDate = 2;
+  int32 patientId = 3;
+}
+
+message CreateVisitDto {
+  string visitDate = 1;
+  int32 patientId = 2;
+}
+
+message Visit {
+  int32 id = 1;
+  string visitDate = 2;
+  int32 patientId = 3;
+}
+
+message VisitList {
+  repeated Visit items = 1;
+}
+
+message Empty {}

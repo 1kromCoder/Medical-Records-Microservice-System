@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package doctor;
+
+service DoctorService {
+  rpc CreateDoctor(CreateDoctorDto) returns (Doctor);
+  rpc FindAllDoctors(Empty) returns (DoctorList);
+  rpc FindOne (FindOneDto) returns (Doctor);
+  rpc UpdateDoctor (UpdateDoctorDto) returns (Doctor);
+  rpc DeleteDoctor (FindOneDto) returns (Doctor);
+}
+
+message CreateDoctorDto {
+  string name = 1;
+  string email = 2;
+}
+
+message UpdateDoctorDto {
+  int32 id = 1;
+  string name = 2;
+  string email = 3;
+}
+
+message FindOneDto {
+  int32 id = 1;
+}
+
+message Doctor {
+  int32 id = 1;
+  string name = 2;
+  string email = 3;
+}
+
+message DoctorList {
+  repeated Doctor items = 1;
+}
+
+message Empty {}
