@@ -12,6 +12,7 @@ import {
 export enum UserRole {
   ADMIN = 'ADMIN',
   DOCTOR = 'DOCTOR',
+  USER = 'USER',
 }
 
 @Entity('user')

@@ -41,7 +41,9 @@ CREATE TABLE "note" (
   CONSTRAINT "fk_visit" FOREIGN KEY ("visitId") REFERENCES "visit"("id") ON DELETE CASCADE
 );
 
-CREATE TYPE "user_role_enum" AS ENUM ('ADMIN', 'DOCTOR');
+CREATE TYPE "user_role_enum" AS ENUM ('ADMIN', 'DOCTOR', 'USER');
+ALTER TYPE "user_role_enum" ADD VALUE 'USER';
+
 
 CREATE TABLE "user" (
   "id" SERIAL PRIMARY KEY,

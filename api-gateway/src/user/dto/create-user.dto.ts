@@ -4,6 +4,7 @@ import { IsEmail, IsEnum, IsNotEmpty, MinLength } from 'class-validator';
 export enum UserRole {
   ADMIN = 'ADMIN',
   DOCTOR = 'DOCTOR',
+  USER = 'USER',
 }
 
 export class CreateUserDto {

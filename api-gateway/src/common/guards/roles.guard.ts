@@ -23,7 +23,7 @@ export class RolesGuard implements CanActivate {
     const user = request.user;
 
     if (!user || !requiredRoles.includes(user.role)) {
-      throw new ForbiddenException('Sizda bu amal uchun ruxsat yo‘q');
+      throw new ForbiddenException('Sizga ruxsat yo‘q');
     }
 
     return true;
