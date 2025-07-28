@@ -1,8 +1,8 @@
-
 import {
   BadRequestException,
   Body,
   Controller,
+  Get,
   InternalServerErrorException,
   Post,
 } from '@nestjs/common';
@@ -21,7 +21,10 @@ export class UserController {
     private readonly userService: UserService,
     private readonly authService: AuthService,
   ) {}
-
+  @Get()
+  async findAll() {
+    return this.userService.findAll();
+  }
   @Post('register')
   async register(@Body() dto: CreateUserDto) {
     try {

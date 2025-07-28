@@ -1,7 +1,6 @@
-
 import { Inject, Injectable, OnModuleInit } from '@nestjs/common';
 import { ClientGrpc } from '@nestjs/microservices';
-import { Observable } from 'rxjs';
+import { lastValueFrom, Observable } from 'rxjs';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './user.interface';
 
@@ -9,6 +8,7 @@ interface UserServiceGrpc {
   CreateUser(data: CreateUserDto): Observable<{ user: User }>;
   FindByEmail(data: { email: string }): Observable<{ user: User }>;
   FindOne(data: { id: number }): Observable<{ user: User }>;
+  FindAll(data: {}): any;
 }
 
 @Injectable()
@@ -27,7 +27,12 @@ export class UserService implements OnModuleInit {
   findByEmail(email: string): Observable<{ user: User }> {
     return this.userService.FindByEmail({ email });
   }
-
+  async findAll(): Promise<User[]> {
+    const response: { items: User[] } = await lastValueFrom(
+      this.userService.FindAll({}),
+    );
+    return response.items;
+  }
   findOne(id: number): Observable<{ user: User }> {
     return this.userService.FindOne({ id });
   }

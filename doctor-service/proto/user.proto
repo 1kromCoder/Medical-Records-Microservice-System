@@ -6,7 +6,15 @@ service UserService {
   rpc CreateUser (CreateUserRequest) returns (UserResponse);
   rpc FindByEmail (FindByEmailRequest) returns (UserResponse);
   rpc FindOne (FindOneRequest) returns (UserResponse);
+  rpc FindAll (Empty) returns (UserList);
+  
 }
+
+
+message UserList {
+  repeated User items = 1;
+}
+
 
 message User {
   int32 id = 1;

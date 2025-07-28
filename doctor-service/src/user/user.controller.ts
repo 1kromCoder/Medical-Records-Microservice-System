@@ -1,4 +1,3 @@
-
 import { Controller } from '@nestjs/common';
 import { GrpcMethod } from '@nestjs/microservices';
 import { UserService } from './user.service';
@@ -13,9 +12,13 @@ export class UserGrpcController {
     const user = await this.userService.create(data);
     return { user };
   }
-
+  @GrpcMethod('UserService', 'FindAll')
+  async findAll(_: any, __: any) {
+    const users = await this.userService.findAll();
+    return { items: users };
+  }
   @GrpcMethod('UserService', 'FindByEmail')
-  async findByEmail(data: { email: string })  {
+  async findByEmail(data: { email: string }) {
     const user = await this.userService.findByEmail(data.email);
     return { user };
   }
