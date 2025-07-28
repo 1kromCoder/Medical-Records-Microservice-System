@@ -5,6 +5,7 @@ import {
   Get,
   InternalServerErrorException,
   Post,
+  UseGuards,
 } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { LoginDto } from './dto/login.dto';
@@ -12,6 +13,9 @@ import { UserService } from './user.service';
 import { AuthService } from '../auth/auth.service';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { User } from './user.interface';
+import { JwtAuthGuard } from 'src/common/guards/jwt-auth.guard';
+import { RolesGuard } from 'src/common/guards/roles.guard';
+import { Roles } from 'src/common/decorators/roles.decorator';
 
 @ApiTags('User')
 @ApiBearerAuth('access-token')
@@ -22,6 +26,9 @@ export class UserController {
     private readonly authService: AuthService,
   ) {}
   @Get()
+  @ApiBearerAuth('access-token')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('ADMIN')
   async findAll() {
     return this.userService.findAll();
   }
